@@ -23,12 +23,10 @@ services:
     volumes:
       - ./docker-config/mmc/.env:/MaiMBot/.env # 持久化env配置文件
       - ./docker-config/mmc:/MaiMBot/config # 持久化bot配置文件
-      - ./docker-config/entrypoint.sh:/opt/entrypoint.sh # 持久化启动脚本（负责安装插件依赖和启动mmc）
       - ./data/MaiMBot/maibot_statistics.html:/MaiMBot/maibot_statistics.html #统计数据输出
       - ./data/MaiMBot:/MaiMBot/data # NapCat 和 NoneBot 共享此卷，否则发送图片会有问题
       - ./modules/plugins:/MaiMBot/plugins # 持久化插件目录
       - ./modules/built_in:/MaiMBot/src/plugins/built_in # 持久化内置加载器(内置插件)
-    entrypoint: ["/bin/bash", "-c", "exec /opt/entrypoint.sh"] # 确保mmc启动时执行脚本
     restart: always
     networks:
       - maim_bot
